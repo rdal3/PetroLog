@@ -102,7 +102,7 @@ export function MaintenanceView() {
                                     <p className="text-xs font-medium theme-text-muted flex items-center gap-1.5 mt-0.5">
                                         <MapPin size={10} /> {m.odometer.toLocaleString('pt-BR')} km
                                         <span className="w-1 h-1 rounded-full theme-border-secondary mx-0.5" />
-                                        {new Date(m.date).toLocaleDateString('pt-BR')}
+                                        {new Date(m.date + 'T12:00:00').toLocaleDateString('pt-BR')}
                                     </p>
                                 </div>
                             </div>

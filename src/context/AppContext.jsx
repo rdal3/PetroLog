@@ -112,7 +112,7 @@ export function AppProvider({ children }) {
                 totalLitersOverall += accumulatedLiters;
                 data.push({
                     id: r.id,
-                    data: new Date(r.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }),
+                    data: new Date(r.date + 'T12:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }),
                     consumo: parseFloat(cons.toFixed(1)),
                     distancia: dist,
                     litersUsed: accumulatedLiters,

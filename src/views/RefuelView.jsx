@@ -108,7 +108,7 @@ export function RefuelView() {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2 mt-1.5 text-xs theme-text-muted font-medium flex-wrap">
-                                    <span className="flex items-center gap-1"><Calendar size={12} /> {new Date(r.date).toLocaleDateString('pt-BR')}</span>
+                                    <span className="flex items-center gap-1"><Calendar size={12} /> {new Date(r.date + 'T12:00:00').toLocaleDateString('pt-BR')}</span>
                                     <span className="w-1 h-1 rounded-full theme-border-secondary" />
                                     <span>{r.liters} L</span>
                                     <span className="w-1 h-1 rounded-full theme-border-secondary" />
