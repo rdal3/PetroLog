@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PetroLog</string>
+    <string name="title_activity_main">PetroLog</string>
+    <string name="package_name">com.rdal3.petrolog</string>
+    <string name="custom_url_scheme">com.rdal3.petrolog</string>
+</resources>
