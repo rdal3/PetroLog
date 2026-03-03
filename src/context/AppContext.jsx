@@ -21,17 +21,8 @@ const defaultBike = {
     type: 'naked',
     tankSize: 14,
     goalKmL: 30,
-    refuels: [
-        { id: 1, date: '2026-01-10', odometer: 15000, liters: 12, cost: 66, fullTank: true, station: 'Shell Centro' },
-        { id: 2, date: '2026-01-25', odometer: 15150, liters: 3.5, cost: 20, fullTank: false, station: '' },
-        { id: 3, date: '2026-02-05', odometer: 15320, liters: 10, cost: 55, fullTank: true, station: 'Ipiranga Av. Brasil' },
-        { id: 4, date: '2026-02-20', odometer: 15650, liters: 10.8, cost: 59.40, fullTank: true, station: 'Shell Centro' },
-        { id: 5, date: '2026-03-01', odometer: 15800, liters: 5, cost: 28, fullTank: false, station: 'BR Rodovia' },
-    ],
-    maintenances: [
-        { id: 1, date: '2025-11-15', odometer: 12000, type: 'Óleo e Filtro', cost: 80, nextOdometer: 15000, notes: 'Motul 10w40' },
-        { id: 2, date: '2026-02-05', odometer: 15100, type: 'Pastilha de Freio', cost: 120, nextOdometer: 25000, notes: 'Dianteira e Traseira' },
-    ],
+    refuels: [],
+    maintenances: [],
 };
 
 function loadFromStorage(key, fallback) {
@@ -264,7 +255,7 @@ export function AppProvider({ children }) {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `motomanager-backup-${new Date().toISOString().split('T')[0]}.json`;
+        a.download = `petrolog-backup-${new Date().toISOString().split('T')[0]}.json`;
         a.click();
         URL.revokeObjectURL(url);
         showToast('Backup exportado!');
@@ -294,10 +285,11 @@ export function AppProvider({ children }) {
     }, [showToast]);
 
     const resetData = useCallback(() => {
-        setBikes([{ ...defaultBike }]);
-        setActiveBikeId(1);
+        setBikes([{ ...defaultBike, id: Date.now() }]);
+        setActiveBikeId(null);
+        setTimeout(() => setBikes(prev => { setActiveBikeId(prev[0].id); return prev; }), 0);
         setTheme('dark');
-        showToast('Dados resetados para o padrão', 'info');
+        showToast('Dados resetados', 'info');
     }, [showToast]);
 
     // --- Notifications ---
