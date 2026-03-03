@@ -28,6 +28,7 @@ export function SettingsView() {
     const [newBikeName, setNewBikeName] = useState('');
     const [newBikeType, setNewBikeType] = useState('naked');
     const [deleteTarget, setDeleteTarget] = useState(null);
+    const [showResetModal, setShowResetModal] = useState(false);
 
     const handleImport = (e) => { const file = e.target.files[0]; if (file) importData(file); e.target.value = ''; };
 
@@ -184,11 +185,11 @@ export function SettingsView() {
                         </div>
                     </button>
                     <input ref={fileInputRef} type="file" accept=".json" onChange={handleImport} className="hidden" />
-                    <button onClick={resetData} className="w-full theme-bg-card border border-red-500/20 rounded-2xl p-4 flex items-center gap-4 hover:opacity-80 transition-colors group">
+                    <button onClick={() => setShowResetModal(true)} className="w-full theme-bg-card border border-red-500/20 rounded-2xl p-4 flex items-center gap-4 hover:opacity-80 transition-colors group">
                         <div className="bg-red-500/10 p-2.5 rounded-xl text-red-400 border border-red-500/20"><RotateCcw size={20} /></div>
                         <div className="text-left">
                             <h4 className="text-sm font-semibold text-red-400">Resetar Dados</h4>
-                            <p className="text-[11px] theme-text-dim">Voltar aos dados de exemplo</p>
+                            <p className="text-[11px] theme-text-dim">Apagar todos os dados permanentemente</p>
                         </div>
                     </button>
                 </div>
@@ -200,6 +201,7 @@ export function SettingsView() {
             </div>
 
             <Modal open={!!deleteTarget} onClose={() => setDeleteTarget(null)} onConfirm={handleDeleteBike} title="Excluir Moto" message="Tem certeza que deseja remover esta moto da garagem? Todos os registros serão perdidos." />
+            <Modal open={showResetModal} onClose={() => setShowResetModal(false)} onConfirm={() => { resetData(); setShowResetModal(false); }} title="Resetar Tudo" message="Todos os abastecimentos, manutenções e configurações serão apagados permanentemente. Deseja continuar?" />
         </div>
     );
 }
